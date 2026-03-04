@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Похудей — Беговые дорожки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Brutal Type';
+  src: url('fonts/BrutalType-Thin.otf') format('opentype');
+  font-weight: 100 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brutal Type';
+  src: url('fonts/BrutalType-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brutal Type';
+  src: url('fonts/BrutalType-Medium.otf') format('opentype');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brutal Type';
+  src: url('fonts/BrutalType-Bold.otf') format('opentype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; }
+body { font-family: 'Brutal Type', 'Inter', sans-serif; background: #fff; color: #1a1a1a; }
+
+/* ── TOKENS ── */
+:root {
+  --orange: #f06529;
+  --orange-d: #e05820;
+  --purple: #6b72a0;
+  --app-bg: #4a5180;
+  --g: clamp(16px, 4vw, 48px);
+}
+
+/* ── PLACEHOLDER ── */
+.ph { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:#aaa; background:#ece9e3; }
+.ph svg { width:40px; height:40px; stroke:#bbb; fill:none; stroke-width:1.5; }
+.ph span { font-size:11px; text-align:center; padding:0 8px; }
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px var(--g); background:#fff;
+  position:sticky; top:0; z-index:100;
+  border-bottom:1px solid #f0f0f0;
+  gap:12px; min-width:0;
+}
+.logo { display:flex; flex-direction:column; line-height:1.1; text-decoration:none; flex-shrink:0; }
+.logo-name { font-size:clamp(15px,2vw,20px); font-weight:800; color:var(--orange); }
+.logo-sub { font-size:10px; color:#999; }
+nav { display:flex; align-items:center; gap:clamp(10px,2.5vw,36px); flex:1; justify-content:center; }
+nav a { font-size:clamp(11px,1.3vw,14px); font-weight:500; color:#1a1a1a; text-decoration:none; white-space:nowrap; transition:color .15s; }
+nav a:hover { color:var(--orange); }
+.hc { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.ib { width:34px; height:34px; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; border-radius:8px; color:#444; }
+.ib:hover { background:#f5f5f5; }
+.ib svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.btn-login { background:#ede9f6; color:#5a4f8c; border:none; border-radius:10px; padding:8px clamp(10px,1.5vw,20px); font-size:clamp(11px,1.3vw,14px); font-weight:500; font-family:'Brutal Type','Inter',sans-serif; cursor:pointer; white-space:nowrap; }
+.btn-login:hover { background:#e0d9f0; }
+
+@media(max-width:640px){ nav { display:none; } }
+@media(max-width:400px){ .logo-sub,.btn-login { display:none; } }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+.hero {
+  padding:0 var(--g) var(--g);
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height:clamp(360px,65vh,680px);
+}
+.hero-left {
+  background:#fdf8ee; border-radius:20px 0 0 20px;
+  padding:clamp(22px,4vw,52px) clamp(18px,4vw,52px) clamp(22px,3vw,44px);
+  display:flex; flex-direction:column; justify-content:space-between; min-width:0;
+}
+.hero-model { font-size:clamp(11px,1.3vw,14px); font-weight:600; margin-bottom:10px; }
+.hero-title { font-size:clamp(18px,3.2vw,36px); font-weight:700; line-height:1.22; letter-spacing:-0.3px; margin-bottom:clamp(16px,3vw,36px); }
+.btn-buy {
+  display:inline-block; background:var(--orange); color:#fff; border:none;
+  border-radius:14px; padding:clamp(11px,1.4vw,16px) clamp(18px,2.5vw,36px);
+  font-size:clamp(12px,1.4vw,15px); font-weight:600; font-family:'Brutal Type','Inter',sans-serif;
+  cursor:pointer; width:fit-content; margin-bottom:clamp(18px,3vw,44px); white-space:nowrap;
+  transition:background .15s;
+}
+.btn-buy:hover { background:var(--orange-d); }
+.hero-stats { display:flex; gap:clamp(6px,1.2vw,16px); }
+.stat-card { background:#fff; border-radius:14px; padding:clamp(8px,1.4vw,16px) clamp(8px,1.4vw,20px); flex:1; min-width:0; }
+.stat-label { font-size:clamp(9px,1.1vw,13px); font-weight:600; line-height:1.3; margin-bottom:5px; }
+.stat-value { font-size:clamp(12px,1.5vw,18px); font-weight:700; color:var(--orange); }
+.stat-sub { font-size:clamp(8px,0.85vw,11px); color:var(--orange); margin-top:2px; }
+.hero-right { border-radius:0 20px 20px 0; overflow:hidden; background:#e8e8e8; min-height:260px; }
+
+@media(max-width:620px){
+  .hero { grid-template-columns:1fr; min-height:auto; }
+  .hero-left { border-radius:20px 20px 0 0; }
+  .hero-right { border-radius:0 0 20px 20px; min-height:200px; }
+}
+
+/* ══════════════════════════════════
+   FEATURES
+══════════════════════════════════ */
+.features { padding:0 var(--g) clamp(32px,5vw,60px); }
+.feature-row {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(20px,5vw,64px); align-items:center;
+  padding:clamp(32px,5vw,60px) 0; border-bottom:1px solid #f0f0f0;
+}
+.feature-row:last-child { border-bottom:none; }
+.feature-row.rev .feature-text { order:1; }
+.feature-row.rev .feature-img  { order:2; }
+.feature-img { border-radius:20px; overflow:hidden; aspect-ratio:4/3.2; min-width:0; }
+.feature-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.feature-text { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.feature-title { font-size:clamp(15px,2vw,20px); font-weight:700; line-height:1.2; }
+.feature-desc { font-size:clamp(12px,1.4vw,15px); color:#444; line-height:1.65; }
+
+@media(max-width:620px){
+  .feature-row, .feature-row.rev { grid-template-columns:1fr; gap:16px; }
+  .feature-row.rev .feature-text { order:2; }
+  .feature-row.rev .feature-img  { order:1; }
+}
+
+/* ══════════════════════════════════
+   DISPLAY
+══════════════════════════════════ */
+.display-section { padding:clamp(36px,5vw,60px) var(--g) clamp(36px,6vw,80px); text-align:center; }
+.display-heading { font-size:clamp(17px,2.2vw,24px); font-weight:700; margin-bottom:clamp(20px,3vw,40px); }
+.display-wrap { max-width:min(780px,100%); margin:0 auto; }
+.display-img { width:100%; aspect-ratio:16/7; border-radius:16px; overflow:hidden; }
+.display-labels { display:flex; justify-content:space-between; }
+.display-label { display:flex; flex-direction:column; align-items:center; flex:1; min-width:0; }
+.label-line { width:1px; height:24px; background:#ccc; }
+.display-label span { font-size:clamp(9px,1.1vw,13px); color:#444; line-height:1.4; text-align:center; margin-top:6px; }
+
+/* ══════════════════════════════════
+   SPECS
+══════════════════════════════════ */
+.specs-section { background:var(--purple); padding:clamp(36px,5vw,64px) var(--g) clamp(36px,5vw,72px); text-align:center; }
+.specs-heading { font-size:clamp(18px,2.5vw,28px); font-weight:700; color:#fff; margin-bottom:clamp(24px,3.5vw,48px); }
+.specs-drawing { max-width:min(780px,100%); margin:0 auto clamp(24px,4vw,48px); overflow:hidden; }
+.specs-drawing svg { width:100%; height:auto; display:block; }
+.specs-table { max-width:min(600px,100%); margin:0 auto clamp(16px,2.5vw,36px); text-align:left; }
+.specs-row { display:flex; justify-content:space-between; align-items:center; padding:clamp(10px,1.5vw,16px) 0; border-bottom:1px solid rgba(255,255,255,.2); font-size:clamp(12px,1.4vw,15px); color:#fff; gap:12px; }
+.specs-row:first-child { border-top:1px solid rgba(255,255,255,.2); }
+.specs-name { font-weight:500; opacity:.9; }
+.specs-val { font-weight:600; flex-shrink:0; }
+.specs-links { max-width:min(600px,100%); margin:0 auto; text-align:left; display:flex; flex-direction:column; gap:12px; padding-top:6px; }
+.specs-more { font-size:13px; font-weight:700; color:#fff; text-decoration:none; letter-spacing:1px; }
+.specs-more:hover { text-decoration:underline; }
+.specs-instr { font-size:15px; color:#fff; text-decoration:none; opacity:.8; }
+.specs-instr:hover { opacity:1; text-decoration:underline; }
+
+/* ══════════════════════════════════
+   IN THE BOX
+══════════════════════════════════ */
+.inbox-section { padding:clamp(36px,5vw,64px) var(--g) clamp(36px,5vw,72px); text-align:center; }
+.inbox-heading { font-size:clamp(18px,2.5vw,26px); font-weight:700; margin-bottom:clamp(24px,4vw,48px); }
+.inbox-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,3.5vw,44px) clamp(12px,2.5vw,32px); max-width:min(600px,100%); margin:0 auto; }
+.inbox-item { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.inbox-img { width:clamp(56px,9vw,96px); height:clamp(56px,9vw,96px); display:flex; align-items:center; justify-content:center; }
+.inbox-img svg { width:100%; height:100%; }
+.inbox-item span { font-size:clamp(11px,1.3vw,14px); font-weight:500; line-height:1.4; text-align:center; }
+
+/* ══════════════════════════════════
+   APP PROMO
+══════════════════════════════════ */
+.app-section { background:var(--app-bg); border-radius:24px 24px 0 0; padding:clamp(32px,5vw,52px) var(--g) clamp(36px,5vw,60px); margin:0 clamp(8px,1.5vw,16px); }
+.app-inner { display:flex; align-items:center; gap:clamp(20px,4vw,48px); max-width:min(860px,100%); margin:0 auto; }
+.app-left { flex:1; min-width:0; }
+.app-title { font-size:clamp(13px,1.7vw,17px); font-weight:700; color:#fff; line-height:1.45; margin-bottom:10px; }
+.app-desc { font-size:clamp(12px,1.3vw,14px); color:rgba(255,255,255,.72); line-height:1.6; margin-bottom:clamp(14px,2.5vw,26px); }
+.app-feats { display:flex; gap:clamp(10px,2vw,24px); flex-wrap:wrap; }
+.app-feat { font-size:clamp(10px,1.1vw,12px); color:rgba(255,255,255,.78); line-height:1.55; display:flex; gap:5px; }
+.app-feat-star { color:var(--orange); font-size:10px; padding-top:2px; flex-shrink:0; }
+.app-right { display:flex; align-items:center; gap:clamp(10px,2vw,18px); flex-shrink:0; }
+.app-icon-col { display:flex; flex-direction:column; align-items:center; gap:7px; }
+.app-icon-box { border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.35); }
+.app-icon-label { font-size:12px; color:rgba(255,255,255,.8); font-weight:500; }
+.phone { width:clamp(96px,12vw,128px); background:#fff; border-radius:20px; padding:9px 7px 7px; box-shadow:0 16px 48px rgba(0,0,0,.45); }
+.phone-notch { width:30px; height:5px; background:#e0e0e0; border-radius:3px; margin:0 auto 5px; }
+.phone-screen { background:#f5f5f5; border-radius:12px; overflow:hidden; padding:7px; }
+.ps-hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px; font-size:9px; font-weight:700; color:#111; }
+.ps-tr { margin-bottom:5px; }
+.ps-btns { display:flex; align-items:center; justify-content:space-between; margin-bottom:5px; }
+.ps-sm { font-size:7px; color:#888; }
+.ps-go { width:22px; height:22px; background:var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:6px; font-weight:700; color:#fff; }
+.ps-conn { background:#e8f5e9; border-radius:3px; padding:2px 5px; font-size:7px; color:#2e7d32; margin-bottom:5px; }
+.ps-stats { display:flex; justify-content:space-between; }
+.ps-sl { font-size:6px; color:#aaa; margin-bottom:1px; }
+.ps-sv { font-size:9px; font-weight:700; color:#111; }
+.bt-icon { flex-shrink:0; }
+
+@media(max-width:620px){
+  .app-inner { flex-direction:column; align-items:flex-start; }
+  .app-right { width:100%; justify-content:center; }
+}
+@media(max-width:420px){ .bt-icon { display:none; } }
+
+/* ══════════════════════════════════
+   VIDEO
+══════════════════════════════════ */
+.video-section { background:var(--orange); padding:clamp(14px,3vw,28px) var(--g); }
+.video-wrap { border-radius:18px; overflow:hidden; aspect-ratio:16/8; background:#2a2a2a; position:relative; cursor:pointer; display:flex; align-items:flex-end; justify-content:flex-end; padding:clamp(14px,3vw,40px); }
+.video-play { width:clamp(40px,6vw,56px); height:clamp(40px,6vw,56px); background:rgba(240,101,41,.85); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.3); }
+.video-play svg { width:clamp(16px,2.5vw,26px); height:clamp(16px,2.5vw,26px); margin-left:3px; }
+
+/* ══════════════════════════════════
+   SUMMARY
+══════════════════════════════════ */
+.summary-section { padding:clamp(36px,6vw,64px) var(--g) clamp(36px,6vw,72px); display:flex; align-items:center; gap:clamp(20px,4vw,48px); max-width:min(900px,100%); margin:0 auto; }
+.sum-left { flex:1; min-width:0; }
+.sum-model { font-size:clamp(15px,1.8vw,18px); font-weight:700; margin-bottom:9px; }
+.sum-desc { font-size:clamp(12px,1.4vw,15px); line-height:1.6; margin-bottom:14px; }
+.sum-list { list-style:disc; padding-left:18px; margin-bottom:24px; display:flex; flex-direction:column; gap:4px; }
+.sum-list li { font-size:clamp(12px,1.4vw,14px); color:#444; line-height:1.5; }
+.sum-btn { background:var(--orange); color:#fff; border:none; border-radius:14px; padding:clamp(11px,1.4vw,15px) clamp(18px,2.5vw,32px); font-size:clamp(12px,1.4vw,15px); font-weight:600; font-family:'Brutal Type','Inter',sans-serif; cursor:pointer; white-space:nowrap; transition:background .15s; }
+.sum-btn:hover { background:var(--orange-d); }
+.sum-right { flex:1; display:flex; justify-content:flex-end; flex-shrink:0; }
+.sum-imgs { position:relative; width:100%; max-width:clamp(180px,32vw,340px); aspect-ratio:1; }
+.sum-ph { width:100%; height:100%; background:#f5f5f5; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:#bbb; font-size:12px; }
+.sum-mat { position:absolute; top:-14px; right:-14px; width:clamp(60px,9vw,96px); height:clamp(60px,9vw,96px); background:#eee; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:#bbb; font-size:10px; box-shadow:0 4px 12px rgba(0,0,0,.08); }
+
+@media(max-width:580px){
+  .summary-section { flex-direction:column; }
+  .sum-right { width:100%; justify-content:center; }
+  .sum-imgs { max-width:240px; }
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.site-footer { background:#fff; border-top:1px solid #eee; padding:clamp(28px,4vw,48px) var(--g) clamp(16px,2.5vw,28px); }
+.footer-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,3vw,32px); margin-bottom:clamp(20px,3vw,40px); }
+.footer-col { display:flex; flex-direction:column; gap:10px; }
+.footer-col a { font-size:clamp(11px,1.3vw,13px); color:#444; text-decoration:none; transition:color .15s; }
+.footer-col a:hover { color:var(--orange); }
+.footer-socials { display:flex; gap:8px; margin-top:4px; }
+.soc { width:32px; height:32px; background:#f5f5f5; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#555; text-decoration:none; transition:background .15s,color .15s; }
+.soc:hover { background:var(--orange); color:#fff; }
+.footer-bottom { border-top:1px solid #eee; padding-top:16px; font-size:13px; color:#aaa; }
+
+@media(max-width:460px){ .footer-cols { grid-template-columns:1fr 1fr; } }
+@media(max-width:320px){ .footer-cols { grid-template-columns:1fr; } }
+
+/* ── HOVER ANIMATIONS ── */
+.stat-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: default;
+}
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.specs-row {
+  transition: border-bottom-width .25s ease;
+  position: relative;
+}
+.specs-row::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 0;
+  height: 2px;
+  background: rgba(255,255,255,.55);
+  transition: width .3s ease;
+}
+.specs-row:hover::after {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <span class="logo-name">Похудей</span>
+    <span class="logo-sub">Все для стройной фигуры</span>
+  </a>
+  <nav>
+    <a href="#">Беговые дорожки</a>
+    <a href="#">Инвентарь для тренировок</a>
+    <a href="#">Одежда и аксессуары</a>
+  </nav>
+  <div class="hc">
+    <button class="ib" aria-label="Корзина"><svg viewBox="0 0 24 24"><path d="M6 2 L3 6 v1 a1 1 0 0 0 1 1 h16 a1 1 0 0 0 1-1 V6 L18 2 Z"/><path d="M3 7 l1.5 11 a2 2 0 0 0 2 1.7 h11 a2 2 0 0 0 2-1.7 L21 7"/><line x1="9" y1="11" x2="9" y2="16"/><line x1="15" y1="11" x2="15" y2="16"/></svg></button>
+    <button class="ib" aria-label="Поиск"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></button>
+    <button class="btn-login">Войти</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <p class="hero-model">WalkingPad MX16</p>
+      <h1 class="hero-title">Складная беговая дорожка для повседневных тренировок в ограниченном пространстве</h1>
+      <button class="btn-buy">Купить за 54 990 ₽</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">Беговое полотно</div><div class="stat-value">132×50 см</div></div>
+      <div class="stat-card"><div class="stat-label">Вес бегуна</div><div class="stat-value">до 135 кг</div></div>
+      <div class="stat-card"><div class="stat-label">Скорость</div><div class="stat-value">до 16 км/ч</div><div class="stat-sub">темп 3:45 мин на км</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Фото товара</span></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature-row">
+    <div class="feature-img"><div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Складная дорожка</span></div></div>
+    <div class="feature-text"><h2 class="feature-title">Складная система</h2><p class="feature-desc">Легко складывать и хранить под кроватью или у стены. Подходит даже для небольших квартир</p></div>
+  </div>
+  <div class="feature-row rev">
+    <div class="feature-text"><h2 class="feature-title">Мощная и тихая</h2><p class="feature-desc">Бесщёточный мотор мощностью 1,5 л. с. обеспечивает плавный разгон и уровень шума менее 65 дБ — соседи не услышат.</p></div>
+    <div class="feature-img"><div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Мотор дорожки</span></div></div>
+  </div>
+  <div class="feature-row">
+    <div class="feature-img"><div class="ph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Слои полотна</span></div></div>
+    <div class="feature-text"><h2 class="feature-title">Безопасность и комфорт</h2><p class="feature-desc">Усиленное четырёхслойное полотно снижает нагрузку на суставы за счёт высокой амортизации.</p></div>
+  </div>
+</section>
+
+<!-- DISPLAY -->
+<section class="display-section">
+  <h2 class="display-heading">На старт, внимание...</h2>
+  <div class="display-wrap">
+    <div class="display-img"><div class="ph" style="background:#1a1a1a"><svg viewBox="0 0 24 24" style="stroke:#444"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span style="color:#555">Дисплей дорожки</span></div></div>
+    <div class="display-labels">
+      <div class="display-label"><div class="label-line"></div><span>Время<br>тренировки</span></div>
+      <div class="display-label"><div class="label-line"></div><span>Скорость</span></div>
+      <div class="display-label"><div class="label-line"></div><span>Регулировка<br>скорости</span></div>
+      <div class="display-label"><div class="label-line"></div><span>Расстояние</span></div>
+      <div class="display-label"><div class="label-line"></div><span>Калории</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="specs-section">
+  <h2 class="specs-heading">Характеристики</h2>
+  <div class="specs-drawing">
+    <svg viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="30" x2="30" y2="170" stroke="white" stroke-width="1" opacity=".6"/><line x1="26" y1="30" x2="34" y2="30" stroke="white" stroke-width="1" opacity=".6"/><line x1="26" y1="170" x2="34" y2="170" stroke="white" stroke-width="1" opacity=".6"/>
+      <text x="18" y="105" fill="white" font-size="11" font-family="'Brutal Type',Inter,sans-serif" opacity=".8" text-anchor="middle" transform="rotate(-90,18,105)">103 см</text>
+      <rect x="55" y="32" width="6" height="138" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".7"/>
+      <rect x="55" y="32" width="60" height="6" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".7"/>
+      <rect x="55" y="158" width="200" height="12" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".7"/>
+      <rect x="70" y="163" width="12" height="7" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".5"/><rect x="230" y="163" width="12" height="7" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".5"/>
+      <line x1="55" y1="185" x2="255" y2="185" stroke="white" stroke-width="1" opacity=".6"/><line x1="55" y1="181" x2="55" y2="189" stroke="white" stroke-width="1" opacity=".6"/><line x1="255" y1="181" x2="255" y2="189" stroke="white" stroke-width="1" opacity=".6"/>
+      <text x="155" y="200" fill="white" font-size="11" font-family="'Brutal Type',Inter,sans-serif" opacity=".8" text-anchor="middle">155 см</text>
+      <rect x="310" y="40" width="140" height="130" rx="4" stroke="white" stroke-width="1.2" fill="none" opacity=".7"/>
+      <rect x="325" y="55" width="110" height="95" rx="2" stroke="white" stroke-width="1" fill="none" opacity=".5"/>
+      <rect x="338" y="68" width="84" height="70" rx="2" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
+      <rect x="324" y="30" width="8" height="14" rx="2" stroke="white" stroke-width="1" fill="none" opacity=".6"/><rect x="428" y="30" width="8" height="14" rx="2" stroke="white" stroke-width="1" fill="none" opacity=".6"/>
+      <rect x="320" y="170" width="10" height="8" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".5"/><rect x="430" y="170" width="10" height="8" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".5"/>
+      <circle cx="380" cy="155" r="4" stroke="white" stroke-width="1" fill="none" opacity=".5"/>
+      <line x1="310" y1="188" x2="450" y2="188" stroke="white" stroke-width="1" opacity=".6"/><line x1="310" y1="184" x2="310" y2="192" stroke="white" stroke-width="1" opacity=".6"/><line x1="450" y1="184" x2="450" y2="192" stroke="white" stroke-width="1" opacity=".6"/>
+      <text x="380" y="203" fill="white" font-size="11" font-family="'Brutal Type',Inter,sans-serif" opacity=".8" text-anchor="middle">70 см</text>
+      <rect x="510" y="80" width="24" height="90" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".7"/>
+      <rect x="534" y="40" width="6" height="130" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".6"/>
+      <rect x="510" y="40" width="30" height="6" rx="2" stroke="white" stroke-width="1.2" fill="none" opacity=".6"/>
+      <rect x="512" y="100" width="8" height="30" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
+      <rect x="505" y="170" width="35" height="8" rx="1" stroke="white" stroke-width="1" fill="none" opacity=".5"/>
+      <line x1="504" y1="188" x2="545" y2="188" stroke="white" stroke-width="1" opacity=".6"/><line x1="504" y1="184" x2="504" y2="192" stroke="white" stroke-width="1" opacity=".6"/><line x1="545" y1="184" x2="545" y2="192" stroke="white" stroke-width="1" opacity=".6"/>
+      <text x="524" y="203" fill="white" font-size="11" font-family="'Brutal Type',Inter,sans-serif" opacity=".8" text-anchor="middle">25 см</text>
+    </svg>
+  </div>
+  <div class="specs-table">
+    <div class="specs-row"><span class="specs-name">Максимальная скорость</span><span class="specs-val">16 км/ч</span></div>
+    <div class="specs-row"><span class="specs-name">Максимальный вес пользователя</span><span class="specs-val">136 кг</span></div>
+    <div class="specs-row"><span class="specs-name">Вес дорожки</span><span class="specs-val">46 кг</span></div>
+    <div class="specs-row"><span class="specs-name">Мощность</span><span class="specs-val">1125 Вт</span></div>
+  </div>
+  <div class="specs-links">
+    <a href="#" class="specs-more">+ БОЛЬШЕ ХАРАКТЕРИСТИК</a>
+    <a href="#" class="specs-instr">Инструкция</a>
+  </div>
+</section>
+
+<!-- IN THE BOX -->
+<section class="inbox-section">
+  <h2 class="inbox-heading">В комплекте</h2>
+  <div class="inbox-grid">
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><path d="M28 20 Q28 16 32 16 L36 16 Q40 16 40 20 L40 58 Q40 62 36 62 L32 62 Q28 62 28 58 Z" stroke="#333" stroke-width="1.5"/><path d="M40 56 Q52 56 58 62 L62 66" stroke="#333" stroke-width="2" stroke-linecap="round"/><circle cx="62" cy="66" r="4" stroke="#333" stroke-width="1.5"/><circle cx="62" cy="70" r="3" stroke="#333" stroke-width="1.5"/></svg></div><span>Шнур питания</span></div>
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><rect x="18" y="28" width="44" height="24" rx="4" stroke="#555" stroke-width="1.5"/><rect x="22" y="32" width="36" height="16" rx="2" stroke="#777" stroke-width="1"/><line x1="14" y1="40" x2="18" y2="40" stroke="#555" stroke-width="2" stroke-linecap="round"/><line x1="62" y1="40" x2="66" y2="40" stroke="#555" stroke-width="2" stroke-linecap="round"/></svg></div><span>Держатель<br>для телефона</span></div>
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><path d="M50 20 L30 40 L36 46 L56 26 Z" stroke="#e05820" stroke-width="1.5"/><path d="M36 46 L28 52 L26 58 L32 56 L38 48 Z" stroke="#e05820" stroke-width="1.5"/><path d="M52 18 L58 24" stroke="#e05820" stroke-width="2" stroke-linecap="round"/><path d="M50 24 C54 20 62 18 62 26" stroke="#e05820" stroke-width="1.2" stroke-dasharray="2 2" opacity=".5"/></svg></div><span>Ключ безопасности</span></div>
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><path d="M24 22 L24 50 Q24 54 28 56" stroke="#888" stroke-width="2" stroke-linecap="round"/><path d="M24 22 Q24 16 30 16" stroke="#888" stroke-width="2" stroke-linecap="round"/><rect x="20" y="18" width="8" height="6" rx="2" stroke="#888" stroke-width="1.5"/></svg></div><span>Ключ-шестигранник</span></div>
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><rect x="30" y="18" width="20" height="36" rx="6" stroke="#aaa" stroke-width="1.5"/><rect x="34" y="14" width="12" height="6" rx="2" stroke="#aaa" stroke-width="1.2"/><line x1="40" y1="54" x2="40" y2="62" stroke="#aaa" stroke-width="1.5"/><circle cx="40" cy="65" r="3" stroke="#aaa" stroke-width="1.2"/><path d="M34 28 Q40 32 46 28" stroke="#aaa" stroke-width="1" opacity=".5"/><path d="M34 36 Q40 40 46 36" stroke="#aaa" stroke-width="1" opacity=".5"/></svg></div><span>Силиконовая смазка</span></div>
+    <div class="inbox-item"><div class="inbox-img"><svg viewBox="0 0 80 80" fill="none"><rect x="20" y="18" width="40" height="44" rx="4" fill="#e05820" opacity=".9"/><rect x="24" y="22" width="32" height="36" rx="2" fill="#f06529" opacity=".5"/><circle cx="40" cy="36" r="9" stroke="white" stroke-width="1.5"/><path d="M37 32 L44 36 L37 40 Z" fill="white"/></svg></div><span>Инструкция</span></div>
+  </div>
+</section>
+
+<!-- APP PROMO -->
+<section class="app-section">
+  <div class="app-inner">
+    <div class="app-left">
+      <h3 class="app-title">Синхронизируй WalkingPad MX16 с бесплатным приложением KS Fit</h3>
+      <p class="app-desc">Отслеживай прогресс и настраивай индивидуальную программу тренировок под свою цель</p>
+      <div class="app-feats">
+        <div class="app-feat"><span class="app-feat-star">✳</span>готовые программы<br>тренировок для дома</div>
+        <div class="app-feat"><span class="app-feat-star">✳</span>анализ нагрузок<br>по неделям и месяцам</div>
+        <div class="app-feat"><span class="app-feat-star">✳</span>рейтинги<br>клубов</div>
+      </div>
+    </div>
+    <div class="app-right">
+      <div class="app-icon-col">
+        <div class="app-icon-box"><svg viewBox="0 0 64 64" fill="none" width="60" height="60"><rect width="64" height="64" rx="14" fill="#111"/><g stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="32" cy="28" r="9" fill="none"/><line x1="32" y1="37" x2="32" y2="48"/><line x1="26" y1="48" x2="38" y2="48"/></g><path d="M23 28 C23 22 28 18 32 18" stroke="#f06529" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <span class="app-icon-label">KS Fit</span>
+      </div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-hd"><span>Workout</span><span style="color:#aaa">G1</span></div>
+          <div class="ps-tr"><svg viewBox="0 0 100 46" width="100%"><rect x="5" y="8" width="90" height="30" rx="6" fill="#e5e5e5"/><rect x="15" y="14" width="70" height="18" rx="3" fill="#d0d0d0"/><rect x="25" y="17" width="50" height="12" rx="2" fill="#c0c0c0"/></svg></div>
+          <div class="ps-btns"><span class="ps-sm">Set Goals</span><div class="ps-go">GO</div><span class="ps-sm">Settings</span></div>
+          <div class="ps-conn">✓ G1 Treadmill Connected</div>
+          <div class="ps-stats"><div><div class="ps-sl">Today's Burned</div><div class="ps-sv">1806</div></div><div><div class="ps-sl">Today's Dist.</div><div class="ps-sv">4302</div></div><div><div class="ps-sl">&nbsp;</div><div class="ps-sv">20.6</div></div></div>
+        </div>
+      </div>
+      <div class="bt-icon"><svg viewBox="0 0 44 44" fill="none" width="40" height="40"><circle cx="22" cy="22" r="22" fill="#1877f2"/><path d="M17 14 L25 22 L17 30 M17 22 L25 14 L25 30" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="video-wrap">
+    <div class="video-play"><svg viewBox="0 0 32 32" fill="white"><polygon points="10,6 26,16 10,26"/></svg></div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary-section">
+  <div class="sum-left">
+    <div class="sum-model">WalkingPad MX16</div>
+    <div class="sum-desc">Складная беговая дорожка<br>для повседневных тренировок<br>в ограниченном пространстве</div>
+    <ul class="sum-list">
+      <li>гарантия 3 года</li>
+      <li>доставка по всей России</li>
+      <li>антивибрационный коврик в подарок</li>
+    </ul>
+    <button class="sum-btn">Купить за 54 990 ₽</button>
+  </div>
+  <div class="sum-right">
+    <div class="sum-imgs">
+      <div class="sum-ph"><svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.2" width="40"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Фото дорожки</span></div>
+      <div class="sum-mat"><svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.2" width="28"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15 l-5-5 L8 18"/></svg><span>Коврик</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-cols">
+    <div class="footer-col">
+      <a href="#">Беговые дорожки</a>
+      <a href="#">Инвентарь для тренировок</a>
+      <a href="#">Одежда и аксессуары</a>
+    </div>
+    <div class="footer-col">
+      <a href="#">О нас</a>
+      <a href="#">Блог</a>
+      <a href="#">Доставка</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <a href="#">Контакты</a>
+      <div class="footer-socials">
+        <a href="#" class="soc" aria-label="VK"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.131-.427.131-.427s-.018-1.304.585-1.496c.595-.189 1.359 1.26 2.169 1.815.612.422 1.076.33 1.076.33l2.161-.03s1.129-.07.594-.957c-.044-.073-.312-.658-1.608-1.859-1.356-1.258-1.174-1.054.459-3.229.996-1.328 1.394-2.139 1.269-2.486-.12-.331-.852-.244-.852-.244l-2.432.015s-.18-.025-.314.056c-.132.079-.216.262-.216.262s-.387 1.028-.903 1.903c-1.088 1.848-1.524 1.946-1.702 1.831-.414-.267-.311-1.073-.311-1.646 0-1.789.271-2.534-.528-2.725-.265-.064-.46-.106-1.138-.113-.871-.009-1.606.003-2.022.207-.277.135-.491.437-.361.454.161.021.525.099.719.362.25.341.241 1.107.241 1.107s.144 2.105-.336 2.367c-.329.18-.781-.187-1.751-1.865-.497-.859-.873-1.809-.873-1.809s-.072-.177-.202-.272c-.157-.115-.376-.151-.376-.151l-2.312.015s-.347.01-.474.161C4.035 8.48 4.124 8.8 4.124 8.8s1.809 4.235 3.855 6.371c1.879 1.958 4.014 1.83 4.014 1.83l1.792.003z"/></svg></a>
+        <a href="#" class="soc" aria-label="Telegram"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 7.16-1.67 7.88c-.12.56-.46.7-.93.43l-2.57-1.9-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.6 4.7-4.24c.2-.18-.05-.28-.32-.1L7.9 14.47l-2.52-.79c-.55-.17-.56-.55.11-.81l9.83-3.79c.46-.17.86.11.71.82z"/></svg></a>
+        <a href="#" class="soc" aria-label="Телефон"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© Похудей</div>
+</footer>
+
+</body>
+</html>
